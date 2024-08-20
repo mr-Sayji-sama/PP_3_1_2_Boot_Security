@@ -64,7 +64,6 @@ public class MyController {
     public String edit(ModelMap model, @RequestParam Long id) {
         //Long id = Long.parseLong(servletRequest.getParameter("id"));
         User user = userService.findUserById(id);
-        user.setPassword("");
         model.addAttribute("user", user);
         List<Role> listRoles = userService.listRoles();
         model.addAttribute("listRoles", listRoles);
@@ -99,6 +98,8 @@ public class MyController {
     public String add(ModelMap model) {
         User user = new User();
         model.addAttribute("user", user);
+        List<Role> listRoles = userService.listRoles();
+        model.addAttribute("listRoles", listRoles);
         return "admin/adminadd";
     }
 
