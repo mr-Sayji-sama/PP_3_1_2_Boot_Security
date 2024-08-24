@@ -62,7 +62,6 @@ public class MyController {
 
     @RequestMapping (value = "/admin/edit", method= RequestMethod.GET)
     public String edit(ModelMap model, @RequestParam Long id) {
-        //Long id = Long.parseLong(servletRequest.getParameter("id"));
         User user = userService.findUserById(id);
         model.addAttribute("user", user);
         List<Role> listRoles = userService.listRoles();
