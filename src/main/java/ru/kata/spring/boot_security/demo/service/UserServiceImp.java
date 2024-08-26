@@ -59,7 +59,10 @@ public class UserServiceImp implements UserDetailsService, UserService {
     }
 
     public boolean saveUser(User user) {
-        if (user.getPassword() != null) {
+        if (user.getPassword().isEmpty()) {
+            User userFromDb = userRepository.findById(user.getId()).get();
+            if (userFromDb != null) {user.setPassword(userFromDb.getPassword());}
+        } else  {
             user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         }
         userRepository.save(user);
